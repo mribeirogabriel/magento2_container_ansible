@@ -1,0 +1,20 @@
+---
+- name: Create Container Magento2 DataBase
+  docker_container:
+    name: magento2_db
+    image: centos/mysql-57-centos7
+    state: present
+    env:
+      MYSQL_ROOT_PASSWORD: "P@ssw0rd"
+      MYSQL_DATABASE: "magentoDB"
+      MYSQL_USER: "magento_app_user"
+      MYSQL_PASSWORD: "M4G3nT0"
+- name: Create Container Magento2 Web Server
+  docker_container:
+    name: magento2_web
+    image: alexcheng/magento2
+    state: present
+    ports:
+    - "80:80"
+    links:
+    - "magento2_db:db"
