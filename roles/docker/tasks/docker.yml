@@ -6,3 +6,7 @@
     mode: '0755'
 - name: Install Docker CE
   shell: /tmp/get-docker.sh
+- name: Clear Temp Files Docker CE
+  file:
+    state: absent
+    path: /tmp/get-docker.sh
